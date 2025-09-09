@@ -7,6 +7,31 @@ defmodule Pm7.Application do
 
   @impl true
   def start(_type, _args) do
+    # Initialize ETS tables for process management
+    :ets.new(:pm7_processes, [
+      :set,
+      :public,
+      :named_table,
+      {:read_concurrency, true},
+      {:write_concurrency, true}
+    ])
+
+    :ets.new(:pm7_process_logs, [
+      :ordered_set,
+      :public,
+      :named_table,
+      {:read_concurrency, true},
+      {:write_concurrency, true}
+    ])
+
+    :ets.new(:pm7_process_stats, [
+      :set,
+      :public,
+      :named_table,
+      {:read_concurrency, true},
+      {:write_concurrency, true}
+    ])
+
     children = [
       Pm7Web.Telemetry,
       Pm7.Repo,
@@ -14,8 +39,8 @@ defmodule Pm7.Application do
        repos: Application.fetch_env!(:pm7, :ecto_repos), skip: skip_migrations?()},
       {DNSCluster, query: Application.get_env(:pm7, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Pm7.PubSub},
-      # Start a worker by calling: Pm7.Worker.start_link(arg)
-      # {Pm7.Worker, arg},
+      # Process management supervisor
+      {Pm7.ProcessManager, []},
       # Start to serve requests, typically the last entry
       Pm7Web.Endpoint
     ]

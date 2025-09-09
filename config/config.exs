@@ -43,6 +43,26 @@ config :tailwind,
     cd: Path.expand("..", __DIR__)
   ]
 
+# Configure live_svelte
+config :live_svelte,
+  # Enable server-side rendering
+  ssr: true,
+  # Component path for Svelte components
+  component_dir: "assets/svelte",
+  # Build configurations
+  build: [
+    esbuild: [
+      version: "0.25.4",
+      cd: Path.expand("../assets", __DIR__),
+      env: %{
+        "NODE_PATH" => [
+          Path.expand("../deps", __DIR__),
+          Mix.Project.build_path()
+        ]
+      }
+    ]
+  ]
+
 # Configures Elixir's Logger
 config :logger, :default_formatter,
   format: "$time $metadata[$level] $message\n",

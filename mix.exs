@@ -21,7 +21,7 @@ defmodule Pm7.MixProject do
   def application do
     [
       mod: {Pm7.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
@@ -63,7 +63,11 @@ defmodule Pm7.MixProject do
       {:gettext, "~> 0.26"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      # Process management dependencies
+      {:erlexec, "~> 2.0"},
+      # Web interface dependencies
+      {:live_svelte, "~> 0.16.0"}
     ]
   end
 

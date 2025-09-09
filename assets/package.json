@@ -1,0 +1,36 @@
+{
+  "name": "pm7-assets",
+  "version": "0.1.0",
+  "description": "Frontend assets for PM7 process manager",
+  "main": "js/app.js",
+  "scripts": {
+    "build": "esbuild js/app.js --bundle --target=es2022 --outdir=../priv/static/assets/js",
+    "watch": "esbuild js/app.js --bundle --target=es2022 --outdir=../priv/static/assets/js --watch",
+    "dev": "npm run watch"
+  },
+  "dependencies": {
+    "phoenix": "file:../deps/phoenix",
+    "phoenix_html": "file:../deps/phoenix_html",
+    "phoenix_live_view": "file:../deps/phoenix_live_view",
+    "live_svelte": "file:../deps/live_svelte",
+    "svelte": "^4.2.18"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.4",
+    "@sveltejs/vite-plugin-svelte": "^2.4.6",
+    "vite": "^4.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dmbr0/pm7"
+  },
+  "keywords": [
+    "process-manager",
+    "nodejs",
+    "phoenix",
+    "svelte",
+    "elixir"
+  ],
+  "author": "Alex Whitney",
+  "license": "MIT"
+}
