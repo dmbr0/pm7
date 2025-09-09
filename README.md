@@ -1,4 +1,4 @@
-# Pm7
+# pm7
 
 To start your Phoenix server:
 
